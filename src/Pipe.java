@@ -14,8 +14,7 @@ public class Pipe {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Pipe p = new Pipe();
-		System.out.println("gamma: "+p.gamma+" spike: "+p.spike);
+		
 
 	}
 
