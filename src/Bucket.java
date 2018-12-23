@@ -1,5 +1,7 @@
 import java.util.Random;
 
+
+///////////////////Neuron Simulator////////////////
 class Bucket {
 	Random random = new Random();
 	double leak = random.nextDouble();
