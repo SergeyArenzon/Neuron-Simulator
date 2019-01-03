@@ -32,11 +32,21 @@ public class Bucket {
 	}
 	/**
 	 * this function return an output spike (i.e. the charge carried by each spike of the neuron)
+	 * the current capacity is set to 0;
 	 * @return gamma 
 	 */
 	public double outputSpike(){
-		this.currentCapacity --;
+		this.currentCapacity = 0;
 		return this.gamma ;
+	}
+	
+	public ArrayList<Pipe> choosePipeRandomaly(){
+		ArrayList<Pipe> choosenPipes = new ArrayList<>();
+		for (Pipe pipe : this.getPipes()) {
+			if(Rand.getRandomBoolean())
+				choosenPipes.add(pipe);
+		}
+		return choosenPipes;
 	}
 	
 	 /////////////// getter and setter ///////////////

@@ -5,6 +5,7 @@ public class Simulation {
 	final double GAMMA = 1; // we assume that each Spike has the same fixed amount of charge = GAMMA; 
 	final long DELTA_T = 1; // one millisecond 
 	double provided_Gamma;
+	final int MAX_CAPACITY = 5; // treshHold
 	Bucket neuron;
 
 	/**
@@ -20,7 +21,8 @@ public class Simulation {
 		
 		while (!neuron.isFull()) {
 			provided_Gamma = 0;
-			for (Pipe pipe : neuron.getPipes()) {
+			for (Pipe pipe : neuron.choosePipeRandomaly()) {
+				
 				provided_Gamma += pipe.getWeight()*pipe.getNum_of_spikes()*GAMMA;
 			}
 			neuron.updateCurrentCapacity((provided_Gamma)-neuron.getLeak());
@@ -48,7 +50,6 @@ public class Simulation {
 		 double currentCapacity=0.0;	
 		 provided_Gamma=0;
 		ArrayList<Pipe> pipes =  new ArrayList<>();
-		final int MAX_CAPACITY = 500; // treshHold
 		int numOfpipe = Rand.randInt(2,5);
 		final double LEAK = GAMMA/10 ;
 
