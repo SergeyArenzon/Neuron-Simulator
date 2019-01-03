@@ -19,7 +19,7 @@ public class Simulation {
 		t.run();
 		
 		while (!neuron.isFull()) {
-			
+			provided_Gamma = 0;
 			for (Pipe pipe : neuron.getPipes()) {
 				provided_Gamma += pipe.getWeight()*pipe.getNum_of_spikes()*GAMMA;
 			}
@@ -38,7 +38,7 @@ public class Simulation {
 
 		t.interrupt();
 
-		System.out.println("current Capacity bigger than Treshhold's neuron: spike output ="+neuron.outputSpike());
+		System.out.println("\nCurrent Capacity bigger than Treshhold's neuron: spike output ="+neuron.outputSpike());
 	}
 	
 	/**
