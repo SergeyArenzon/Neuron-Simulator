@@ -5,7 +5,7 @@ public class Simulation {
 	final double GAMMA = 1; // we assume that each Spike has the same fixed amount of charge = GAMMA; 
 	final long DELTA_T = 1; // one millisecond 
 	double provided_Gamma;
-	final int MAX_CAPACITY = 5; // treshHold
+	final int MAX_CAPACITY = 10; // treshHold
 	Bucket neuron;
 
 	/**
@@ -13,23 +13,35 @@ public class Simulation {
 	 * 
 	 */
 	public void  simulate() {
+
 		
-		simulator_initialization();
+	//	simulator_random_initialization();
+		simulator_initialization(4);
+		Coincidence_Detector detector = new Coincidence_Detector();
+
 		
+
+		System.out.println("Simulator of a leaky integrate and fire neuron");
+		System.out.println(neuron);
+
 		Thread t = new Thread();
 		t.run();
-		
+
 		while (!neuron.isFull()) {
 			provided_Gamma = 0;
 			for (Pipe pipe : neuron.choosePipeRandomaly()) {
-				
 				provided_Gamma += pipe.getWeight()*pipe.getNum_of_spikes()*GAMMA;
+				detector.checkforCoincidenceB(provided_Gamma, pipe);
 			}
+			if(detector.isCoincidenceB_detected())
+				System.out.println("Coincidence B detected !");
+			
 			neuron.updateCurrentCapacity((provided_Gamma)-neuron.getLeak());
 			System.out.println("current Capacity= "+neuron.getCurrentCapacity()+" provided Gamma= "+provided_Gamma);
-
-			try {
+			
 				
+			try {
+
 				t.sleep(DELTA_T);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -42,13 +54,13 @@ public class Simulation {
 
 		System.out.println("\nCurrent Capacity bigger than Treshhold's neuron: spike output ="+neuron.outputSpike());
 	}
-	
+
 	/**
-	 * initialization of the neuron for simulation
+	 * initialization of the neuron with random values for simulation
 	 */
-	public void simulator_initialization(){
-		 double currentCapacity=0.0;	
-		 provided_Gamma=0;
+	public void simulator_random_initialization(){
+		double currentCapacity=0.0;	
+		provided_Gamma=0;
 		ArrayList<Pipe> pipes =  new ArrayList<>();
 		int numOfpipe = Rand.randInt(2,5);
 		final double LEAK = GAMMA/10 ;
@@ -60,9 +72,26 @@ public class Simulation {
 			pipes.add(pipe);
 		}
 		neuron = new Bucket(LEAK, MAX_CAPACITY,currentCapacity,GAMMA, pipes);
-		
-		System.out.println("Simulator of a leaky integrate and fire neuron");
-		System.out.println(neuron);
+
+	}
+
+	/**
+	 * initialization of the neuron with random values for simulation
+	 */
+	public void simulator_initialization(int numofPipe){
+		double currentCapacity=0.0;	
+		provided_Gamma=0;
+		ArrayList<Pipe> pipes =  new ArrayList<>();
+		int numOfpipe = numofPipe;
+		final double LEAK = GAMMA/10 ;
+
+		for (int i = 0; i < numOfpipe; i++) {
+			double weight = 1;
+			int num_of_Spikes = Rand.randInt(1, 5);
+			Pipe pipe = new Pipe(weight, num_of_Spikes);
+			pipes.add(pipe);
+		}
+		neuron = new Bucket(LEAK, MAX_CAPACITY,currentCapacity,GAMMA, pipes);
 	}
 
 }

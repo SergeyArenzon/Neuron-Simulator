@@ -1,9 +1,8 @@
-import java.util.Random;
 
 public class Pipe {
-	private Random random = new Random();
 	public double weight;
 	 public int num_of_spikes;
+	 public String name;
 	
 	
 	
@@ -15,7 +14,12 @@ public class Pipe {
 		this.num_of_spikes= num_of_Spikes;	
 	}
 	 
-
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public double getWeight() {
 		return weight;
 	}
