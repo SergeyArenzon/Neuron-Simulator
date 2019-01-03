@@ -19,7 +19,7 @@ public class Bucket {
 	}
 	
 	
-	public boolean isFull(){
+	public boolean treshholdReached(){
 		return this.treshHold <= this.currentCapacity ;
 	}
 	/**
@@ -47,6 +47,15 @@ public class Bucket {
 				choosenPipes.add(pipe);
 		}
 		return choosenPipes;
+	}
+	
+	public Pipe getPipe(String name){
+		int i ;
+		for (i = 0; i < pipes.size(); i++) {
+			if (pipes.get(i).getName().equals(name)) 
+				break;
+		}
+		return pipes.get(i);
 	}
 	
 	 /////////////// getter and setter ///////////////
