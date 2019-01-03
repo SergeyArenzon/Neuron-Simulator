@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-
+//  an object representing a bucket (neuron)
 
 public class Bucket {
 
