@@ -1,21 +1,29 @@
 import java.util.Stack;
 
 public class Pipe {
+	
 	public double weight;
 	 public int num_of_spikes;
 	 public String name;
 	 public Stack <Integer> spikeSet;
-	
+	 public int counter;
 	
 	 public Pipe(){
 			
 	}
-	 public Pipe(double weight, int num_of_Spikes) {
+	 public Pipe(double weight, int num_of_Spikes,int counter) {
 		this.weight= weight;
 		this.num_of_spikes= num_of_Spikes;	
 		this.name = "";
+		this.counter=counter;
 	}
 	 
+	public int getCounter() {
+		return counter;
+	}
+	public void setCounter(int counter) {
+		this.counter = counter;
+	}
 	public String getName() {
 		return name;
 	}

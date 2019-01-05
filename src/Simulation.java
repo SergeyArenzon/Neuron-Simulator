@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Simulation {
-
+   
 	final double GAMMA = 1; // we assume that each Spike has the same fixed amount of charge = GAMMA; 
 	final long DELTA_T = 1; // one millisecond 
 	double provided_Gamma;
@@ -15,8 +15,8 @@ public class Simulation {
 	public void  simulate(){
 
 
-		//	simulator_random_initialization();
-		simulator_initialization(4);
+			simulator_initialization(4);
+		 //simulator_random_initialization();;
 		Coincidence_Detector detector = new Coincidence_Detector();
 
 
@@ -45,9 +45,10 @@ public class Simulation {
 				}
 			
 			for (Pipe pipe : neuron.choosePipeRandomaly()) {
+				System.out.println("Pipe Number: "+pipe.getCounter());
 				provided_Gamma += pipe.getWeight()*pipe.getNum_of_spikes()*GAMMA*DELTA_T;
 				detector.checkforCoincidenceB(provided_Gamma, pipe);
-				detector.checkforCoincidenceC(provided_Gamma, pipe);
+			//	detector.checkforCoincidenceC(provided_Gamma, pipe);
 			}
 			if(detector.isCoincidenceB_detected())
 				System.out.println("Coincidence B detected !");
@@ -68,11 +69,12 @@ public class Simulation {
 		ArrayList<Pipe> pipes =  new ArrayList<>();
 		int numOfpipe = Rand.randInt(2,5);
 		final double LEAK = GAMMA/50 ;
-
+	
 		for (int i = 0; i < numOfpipe; i++) {
 			double weight = Rand.randDouble(0, 1);
 			int num_of_Spikes = Rand.randInt(1, 5);
-			Pipe pipe = new Pipe(weight, num_of_Spikes);
+			Pipe pipe = new Pipe(weight, num_of_Spikes,i);
+			
 			pipes.add(pipe);
 		}
 		neuron = new Bucket(LEAK, MAX_CAPACITY,currentCapacity,GAMMA, pipes);
@@ -88,20 +90,21 @@ public class Simulation {
 		ArrayList<Pipe> pipes =  new ArrayList<>();
 		int numOfpipe = numofPipe;
 		final double LEAK = GAMMA/10 ;
-
+		int num = 0;
 		for (int i = 0; i < numOfpipe-2; i++) {
 			double weight = 1;
 			int num_of_Spikes = Rand.randInt(1, 5);
-			Pipe pipe = new Pipe(weight, num_of_Spikes);
+			Pipe pipe = new Pipe(weight, num_of_Spikes,i);
+			num=i;
 			pipes.add(pipe);
 		}
 		// setting the two dendrites corresponding of 1.c
 		int nextrain1[]={1,1,1,1}; // 5 - 1 that already be generated
 		int nextrain2[]={1,1}; // 3 - 1 that already be generated
-		Pipe D_1 = new Pipe(1, 1);
+		Pipe D_1 = new Pipe(1, 1,num+1);
 		D_1.setName("D_1");
 		D_1.setSpikeSet(nextrain1);
-		Pipe D_2 = new Pipe(1, 1);
+		Pipe D_2 = new Pipe(1, 1,num+2);
 		D_2.setName("D_2");
 		D_2.setSpikeSet(nextrain2);
 
