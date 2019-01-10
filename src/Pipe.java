@@ -2,28 +2,32 @@ import java.util.Stack;
 
 public class Pipe {
 	public double weight;
-	 public int num_of_spikes;
-	 public String name;
-	 public Stack <Integer> spikeSet;
-	
-	
-	 public Pipe(){
-			
+	public int num_of_spikes;
+	public String name;
+	public Stack <Integer> spikeSet;
+
+
+	public Pipe(){
+
 	}
-	 public Pipe(double weight, int num_of_Spikes) {
-		this.weight= weight;
+	public Pipe(int num_of_Spikes) {
 		this.num_of_spikes= num_of_Spikes;	
 		this.name = "";
 	}
-	 
+
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
+	public double getRandomWeight() {
+		setWeight(Rand.randDouble(0, 1));
+		return this.weight ;
+	}
+
 	public double getWeight() {
-		return weight;
+		return this.weight ;
 	}
 	
 	public void setWeight(double weight) {
@@ -39,7 +43,7 @@ public class Pipe {
 	public void setNum_of_spikes(int num_of_spikes) {
 		this.num_of_spikes = num_of_spikes;
 	}
-	
+
 	public Stack<Integer> getSpikeSet() {
 		return spikeSet;
 	}
@@ -51,7 +55,7 @@ public class Pipe {
 	}
 	@Override
 	public String toString() {
-		return "Pipe [weight=" + weight + ", num_of_spikes=" + num_of_spikes + "]";
+		return "Pipe [name="+ name +", weight=" + weight + ", num_of_spikes=" + num_of_spikes + "]";
 	}
 
 }

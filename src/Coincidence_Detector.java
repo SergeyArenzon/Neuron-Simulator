@@ -2,6 +2,7 @@
 public class Coincidence_Detector {
 	
 public boolean coincidenceB_detected = false ;
+public boolean coincidenceC_detected = false ;
 public int counter ;
 public Pipe D_1, D_2;
 private boolean E_1_Occured,E_2_Occured;
@@ -10,6 +11,7 @@ private boolean E_1_Occured,E_2_Occured;
 public  Coincidence_Detector() {
 
 	this.coincidenceB_detected = false ;
+	this.coincidenceC_detected = false ;
 	this.E_1_Occured = false ;
 	this.E_2_Occured = false ;
 	this.counter= 0;
@@ -18,6 +20,18 @@ public  Coincidence_Detector() {
 // getter and setter
 public boolean isCoincidenceB_detected() {
 	return coincidenceB_detected;
+}
+
+public void setCoincidenceB_detected(boolean coincidenceB_detected) {
+	this.coincidenceB_detected = coincidenceB_detected;
+}
+
+public boolean isCoincidenceC_detected() {
+	return coincidenceC_detected;
+}
+
+public void setCoincidenceC_detected(boolean coincidenceC_detected) {
+	this.coincidenceC_detected = coincidenceC_detected;
 }
 
 public boolean isE_1_Occured() {
@@ -36,10 +50,20 @@ public void setE_2_Occured(boolean e_2_Occured) {
 	E_2_Occured = e_2_Occured;
 }
 
+public void initalize(){
+	this.D_1 = null ;
+	this.D_2 = null ;
+	this.coincidenceB_detected = false ;
+	this.coincidenceC_detected = false ;
+	this.counter= 0;
+}
+
+
 /**
  * check for coincidence according to the part 1.B
  * Assume E1 causes a spike to be generated for dendrites (pipe) D1 ,
  *  E2 causes a spike to be generated for (pipe) dendrites D2.
+ *  if there are two different pipes that inputed One spike, then there is coincidence !
  * @param provided_gamma
  * @param currentPipe
  */
@@ -47,10 +71,7 @@ public void checkforCoincidenceB(double provided_gamma,Pipe currentPipe) {
 	if(provided_gamma==1 && D_1 == null) {
 		this.D_1 = currentPipe;
 	}
-	else if(provided_gamma==1 && D_1 != null) {
-		this.D_2 = currentPipe;
-	}
-	if( D_1 != null && D_2 != null )
+	else if(provided_gamma==1 && D_1 != currentPipe) 
 		coincidenceB_detected = true;
 }
 
@@ -76,8 +97,12 @@ public void checkforCoincidenceC(double provided_gamma,Pipe currentPipe) {
 		
 	if(provided_gamma==1 && currentPipe.getName().equals("D_2")){
 		E_2_Occured = true ;
-		System.out.println("E_2 from 1.c occured !");
+		System.out.println("E_2 from 1.c occured spike num 1 generated from D_2!");
 	}
+	
+	if(E_1_Occured && E_2_Occured)
+		this.coincidenceC_detected = true ;
+		
 }
 
 }

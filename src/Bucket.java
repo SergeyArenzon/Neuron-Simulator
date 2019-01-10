@@ -29,6 +29,8 @@ public class Bucket {
 	 */
 	public void updateCurrentCapacity(double finalGammaInserted){
 		this.currentCapacity += finalGammaInserted;
+		if(this.currentCapacity < 0)
+			this.currentCapacity = 0 ;
 	}
 	/**
 	 * this function return an output spike (i.e. the charge carried by each spike of the neuron)
