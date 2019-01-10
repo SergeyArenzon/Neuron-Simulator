@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Simulation {
-
+   
 	final double GAMMA = 1; // we assume that each Spike has the same fixed amount of charge = GAMMA; 
 	final long DELTA_T = 1; // one millisecond 
 	final int MAX_CAPACITY = 10; // treshHold
@@ -50,7 +50,7 @@ public class Simulation {
 		ArrayList<Pipe> pipes =  new ArrayList<>();
 		int numOfpipe = Rand.randInt(2,5);
 		final double LEAK = GAMMA/50 ;
-
+	
 		for (int i = 0; i < numOfpipe; i++) {
 			//double weight = Rand.randDouble(0, 1);
 			int max_num_of_Spikes = Rand.randInt(1, 5);

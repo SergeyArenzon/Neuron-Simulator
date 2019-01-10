@@ -1,6 +1,7 @@
 import java.util.Stack;
 
 public class Pipe {
+	
 	public double weight;
 	public int num_of_spikes;
 	public String name;
@@ -13,6 +14,7 @@ public class Pipe {
 	public Pipe(int num_of_Spikes) {
 		this.num_of_spikes= num_of_Spikes;	
 		this.name = "";
+		this.counter=counter;
 	}
 
 	public String getName() {
